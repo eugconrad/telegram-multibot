@@ -22,7 +22,7 @@ def main():
     else:
         password = r.get("password")
 
-    Client(session_name="selfbot", api_id=API_ID, api_hash=API_HASH , plugins=plugins).run()
+    Client(session_name="Multibot", api_id=API_ID, api_hash=API_HASH , plugins=plugins).run()
     if not r.get("autodeltime"): r.set("autodeltime", "10")
 
 
