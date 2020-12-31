@@ -47,7 +47,7 @@ cd telegram-multibot/
 
 4 - Подготовка базы данных 📦
 
-# Linux:
+### Linux:
 ```bash
 ***База данных***
 #Debian
@@ -69,7 +69,7 @@ pip3 install -r requirements.txt
 python3 bot.py
 ```
 
-# Mac OS:
+### Mac OS:
 ```bash
 ***База данных***
 brew update
