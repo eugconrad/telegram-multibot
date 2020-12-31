@@ -10,26 +10,23 @@
 ## 🍒 О проекте
  - Multibot представляет из себя модульного бота с набором различных развлекательно-инфррмационных чат-функций а так же автоматизацию неких задач, таких как автоответчик и тд
  - Бот легко может дополняться с помощью написания подключаемых плагинов на языке Python
+ 
 Multibot разработан для личного аккуанта Телеграм. Не для ботов (!)
 
-☎️ Контакты:
-</p>
-<p >
-	<a href="https://t.me/zxvghost666">
-        <img src="https://icons.iconarchive.com/icons/froyoshark/enkel/512/Telegram-icon.png" alt="Разработчик" height="75" width="75">
-    </a>
-</p>
+Контакты:
+- <a href="https://t.me/zxvghost666">Telegram</a>
+- <a href="https://instagram.com/zxv.ghost666">Instagram</a>
 
 ## 🚧 Требования
 - Python версии 3.6 или новее
 - Telegram API ключ (https://my.telegram.org/apps)
 
 ## 📚 Библиотеки (Всё есть в requirements.txt)
-<a href=https://github.com/pyrogram/pyrogram>pyrogram</a><br>
-<a href=https://github.com/paramiko/paramiko>paramiko</a><br>
-<a href=https://github.com/giampaolo/psutil>psutil</a><br>
-<a href=https://github.com/andymccurdy/redis-py>redis</a><br>
-<a href=https://github.com/psf/requests>requests</a>
+- <a href=https://github.com/pyrogram/pyrogram>pyrogram</a><br>
+- <a href=https://github.com/paramiko/paramiko>paramiko</a><br>
+- <a href=https://github.com/giampaolo/psutil>psutil</a><br>
+- <a href=https://github.com/andymccurdy/redis-py>redis</a><br>
+- <a href=https://github.com/psf/requests>requests</a>
 
 ## 📲 Установка
 1 - Получение API ID и ключа 🔐
