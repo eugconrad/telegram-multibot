@@ -46,19 +46,34 @@ cd telegram-multibot/
 ***ВНИМАНИЕ: Если вы будете использовать API_KEY чужого аккаунта, то ВАШ аккаунт будет удален Телеграмом!***
 
 4 - Подготовка базы данных 📦
+Linux:
 ```bash
-
 ***База данных***
 #Debian
 sudo apt install redis-server
+
 #Arch
 sudo pacman -S redis-server
+
 #Fedora
 sudo dnf -y install redis
+
 #Включить и запустить базу данных
 service redis-server enable
 service redis-server start
 
+
+*** Подготовка к запуску и сам запуск ***
+pip3 install -r requirements.txt
+python3 bot.py
+```
+
+Mac OS:
+```bash
+***База данных***
+brew update
+brew install redis
+brew services start redis
 
 *** Подготовка к запуску и сам запуск ***
 pip3 install -r requirements.txt
