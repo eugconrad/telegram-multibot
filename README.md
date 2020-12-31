@@ -3,6 +3,8 @@
     <a href="">
         <img src="https://raw.githubusercontent.com/Conradk10/telegram-multibot/pics/multibotby.jpg" alt="Multibot">
     </a>
+	<a href="https://github.com/Conradk10/telegram-multibot/releases"><img src="https://img.shields.io/github/v/release/conradk10/telegram-multibot?include_prereleases&style=flat-square"></a>
+	<a href="https://github.com/Conradk10/telegram-multibot/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Conradk10/telegram-multibot?style=flat-square"></a>
 	<br>
 	</br>
 
