@@ -25,7 +25,7 @@ def today(app : Client , msg : Message):
 
     text = bot.botfullprefix + f"""Сегодня `{today}`, на календаре `{datetime.datetime.today().strftime("%d.%m.%Y")}`
 Идёт `{int(datetime.datetime.today().strftime("%j"))}` день `{datetime.datetime.today().strftime("%Y")}` года
-Текущее время `{datetime.datetime.today().strftime("%H часов %M минут")}`"""
+Текущее время `{datetime.datetime.today().strftime("%H")}` часов `{datetime.datetime.today().strftime("%M")}` минут"""
     app.edit_message_text(
         chat_id=msg.chat.id,
         message_id=msg.message_id,
