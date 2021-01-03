@@ -23,30 +23,29 @@ def today(app : Client , msg : Message):
     elif weekday == 6:
         today = "воскресенье"
 
-    hour = int(datetime.datetime.today().strftime("%H"))
-    minute = int(datetime.datetime.today().strftime("%M"))
+    hour = int(datetime.datetime.today().strftime("%H")) % 10
+    minute = int(datetime.datetime.today().strftime("%M")) % 10
     hour_s = "часа"
     minute_s = "минут"
 
-    if hour == 1 or hour == 21:
+    if hour == 1:
         hour_s = "час"
-    elif hour >=2 and hour <= 4 or hour >= 22 and hour <= 24:
+    elif hour >=2 and hour <= 4:
         hour_s = "часа"
     else:
         hour_s = "часов"
 
-    if minute == 1 or minute == 21 or minute == 31 or minute == 41 or minute == 51:
+    if minute == 1:
         minute_s = "минута"
-    elif minute >= 2 and minute <= 4 or minute >= 22 and minute <= 24 or minute >= 32 and minute <= 34 or minute >= 42 and minute <= 44 or minute >= 52 and minute <= 54:
+    elif minute >= 2 and minute <=4:
         minute_s = "минуты"
-    elif minute == 0 or minute >= 5 and minute <= 20 or minute >= 25 and minute <= 30 or minute >= 35 and minute <= 40 or minute >= 45 and minute <= 50 or minute >= 55 and minute <= 60:
+    else:
         minute_s = "минут"
-
 
 
     text = bot.botfullprefix + f"""Сегодня `{today}`, на календаре `{datetime.datetime.today().strftime("%d.%m.%Y")}`
 Идёт `{int(datetime.datetime.today().strftime("%j"))}` день `{datetime.datetime.today().strftime("%Y")}` года
-Текущее время `{hour}` {hour_s} `{minute}` {minute_s} """
+Текущее время `{datetime.datetime.today().strftime("%H")}` {hour_s} `{datetime.datetime.today().strftime("%M")}` {minute_s} """
     app.edit_message_text(
         chat_id=msg.chat.id,
         message_id=msg.message_id,
