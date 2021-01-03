@@ -21,7 +21,7 @@ Multibot разработан для личного аккаунта Телег�
 - Python версии 3.6 или новее
 - Telegram API ключ (https://my.telegram.org/apps)
 
-## 📚 Библиотеки (Остальное в requirements.txt)
+## 📚 Модули
 - <a href=https://github.com/pyrogram/pyrogram>Pyrogram 0.16.0</a><br>
 - <a href=https://github.com/paramiko/paramiko>paramiko 2.7.1</a><br>
 - <a href=https://github.com/giampaolo/psutil>psutil 5.6.7</a><br>
@@ -29,7 +29,7 @@ Multibot разработан для личного аккаунта Телег�
 - <a href=https://github.com/psf/requests>requests 2.22.0</a>
 
 ## 📲 Установка
-1 - Скачивание бота 💾
+1 - Загрузка бота 💾
   ```bash
   git clone https://github.com/Conradk10/telegram-multibot
   cd telegram-multibot/
