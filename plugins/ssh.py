@@ -2,6 +2,7 @@ from pyrogram import Client , Message , Filters
 from db import r
 import time
 import paramiko
+import bot
 
 isshhconnect = False
 sshc = None
@@ -39,7 +40,7 @@ class ssh():
 
 
 ### ADD SERVER FOR SSH
-@Client.on_message(Filters.regex("^[Aa]ddserver$") & Filters.me & Filters.reply, group=38)
+@Client.on_message(Filters.regex("!addserver$") & Filters.me & Filters.reply)
 def addserver(app : Client ,msg : Message):
     text = msg.reply_to_message.text
     try:
@@ -57,7 +58,7 @@ def addserver(app : Client ,msg : Message):
 
 
 ### CONNECT TO SSH
-@Client.on_message(Filters.regex("^[Cc]onnect$") & Filters.me , group=39)
+@Client.on_message(Filters.regex("!connect$") & Filters.me , group=40)
 def connecttossh(app : Client, msg : Message):
     global sshc, isshhconnect
     server = r.hgetall("ssh")
@@ -78,13 +79,13 @@ def connecttossh(app : Client, msg : Message):
             time.sleep(float(r.get("autodeltime")))
             app.delete_messages(msg.chat.id,msg.message_id)
 
-@Client.on_message(Filters.text & Filters.me, group=-1)
+@Client.on_message(Filters.text & Filters.me, group=41)
 def cmd_ssh(app : Client ,msg : Message):
 
     global sshc, isshhconnect
     text = msg.text
     if isshhconnect:
-        if text == "exit()":
+        if text == "!disconnect":
             isshhconnect = False
             sshc = None
             txt = "[SSH] Отключено"

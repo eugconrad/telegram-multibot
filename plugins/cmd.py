@@ -1,11 +1,10 @@
 from pyrogram import Client , Message , Filters
 from db import r
 import time
+import bot
 
 
-
-### SET A FILE AS CMD
-@Client.on_message(Filters.me  & Filters.reply & Filters.regex("^[Ss]et (.*)$") , group=0)
+@Client.on_message(Filters.me  & Filters.reply & Filters.regex("!setcmd (.*)$") , group=7)
 def setcmd(app : Client ,msg : Message):
     cmd = msg.text.split(" ")[1]
     rmsg = msg.reply_to_message
@@ -38,17 +37,20 @@ def setcmd(app : Client ,msg : Message):
         r.hmset("qanswer", {cmd: fid})
 
     else:return
-    app.edit_message_text(msg.chat.id,msg.message_id,f"**[Multibot]** Быстрая команда `{cmd}` на это вложение успешно установлена")
+    app.edit_message_text(msg.chat.id,msg.message_id, bot.botfullprefix + f"Быстрая команда `{cmd}` на это вложение успешно установлена")
     if r.get("autodel") == "on":
             time.sleep(float(r.get("autodeltime")))
             app.delete_messages(msg.chat.id,msg.message_id)
 
 
-### SHOW CMD LIST
-@Client.on_message(Filters.regex("^[Cc]mdlist$") & Filters.me , group=1)
+@Client.on_message(Filters.regex("!cmdlist") & Filters.me , group=8)
 def cmdlist(app : Client ,msg : Message):
-    text = "**[Multibot]** Список доступых быстрых команд:\n"
     cmds = r.hgetall("qanswer")
+    if len(cmds) < 1:
+        text = bot.botfullprefix + "Быстрых команд не найдено\n\n Установить команду: \n `setcmd` {cmd}   __(через ответ)__"
+    else:
+        text = bot.botfullprefix + "Список быстрых команд:\n"
+
     for i in cmds:
         text = text + f"`{i}` - __{cmds[i].split(':')[0]}__\n"
 
@@ -57,18 +59,18 @@ def cmdlist(app : Client ,msg : Message):
             time.sleep(float(r.get("autodeltime")))
             app.delete_messages(msg.chat.id,msg.message_id)
 
-### DEL CMD
-@Client.on_message(Filters.regex("^[Dd]cmd (.*)$") & Filters.me , group=2)
+
+@Client.on_message(Filters.regex("!delcmd (.*)$") & Filters.me , group=9)
 def delcmd(app : Client ,msg : Message):
     cmd = msg.text.split(" ")[1]
     r.hdel("qanswer", cmd)
-    app.edit_message_text(msg.chat.id,msg.message_id,f"**[Multibot]** Быстрая команда `{cmd}` успешно удалена")
+    app.edit_message_text(msg.chat.id,msg.message_id, bot.botfullprefix + f"Быстрая команда `{cmd}` успешно удалена")
     if r.get("autodel") == "on":
             time.sleep(float(r.get("autodeltime")))
             app.delete_messages(msg.chat.id,msg.message_id)
 
 
-@Client.on_message(Filters.text & Filters.me, group=3)
+@Client.on_message(Filters.text & Filters.me, group=10)
 def cmd (app : Client , msg : Message):
     text = msg.text
     if text in r.hgetall("qanswer"):

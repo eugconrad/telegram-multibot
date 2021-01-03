@@ -1,8 +1,9 @@
 from pyrogram import Client , Message , Filters
 from db import r
 import time , random
+import bot
 
-@Client.on_message(Filters.me &  Filters.regex("^[Ss]pam (\d*)$") & Filters.reply , group=21)
+@Client.on_message(Filters.me &  Filters.regex("!spam (\d*)$") & Filters.reply , group=37)
 def spam(app : Client ,msg : Message):
     msgid = msg.reply_to_message.message_id
     chatid = msg.chat.id
@@ -17,7 +18,7 @@ def spam(app : Client ,msg : Message):
 
 
 
-@Client.on_message(Filters.regex("^[Ss]pamf (\d*)$") & Filters.me , group=22)
+@Client.on_message(Filters.regex("!spamf (\d*)$") & Filters.me , group=38)
 def spamf(app : Client ,msg : Message):
     msg_id = None
     if msg.reply_to_message: msg_id = msg.reply_to_message.message_id

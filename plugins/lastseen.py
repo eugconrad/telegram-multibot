@@ -2,9 +2,10 @@ from pyrogram import Client , Message , Filters
 from pyrogram.api import functions , types
 from db import r
 import time
+import bot
 
 ### RECENTLY & ONLINE
-@Client.on_message(Filters.me & Filters.regex("^([Nn]obody|[Ee]verybody)$") , group=0)
+@Client.on_message(Filters.me & Filters.regex("^(!nobody|!everybody)$") , group=18)
 def setprivacy(app : Client ,msg : Message):
     if  "obody" in str(msg.text):
         app.send(
@@ -13,7 +14,7 @@ def setprivacy(app : Client ,msg : Message):
                 rules=[types.InputPrivacyValueDisallowAll()]
             )
         )
-        app.edit_message_text(text="**[Multibot]** Режим невидимки `Вкл`",
+        app.edit_message_text(text=bot.botfullprefix + "Режим невидимки `Вкл`",
             chat_id=msg.chat.id,
             message_id=msg.message_id,)
         r.set("lastseen", "NoBody")
@@ -30,7 +31,7 @@ def setprivacy(app : Client ,msg : Message):
             )
         )
 
-        app.edit_message_text(text="**[Multibot]** Режим невидимки `Выкл`",
+        app.edit_message_text(text=bot.botfullprefix + "Режим невидимки `Выкл`",
             chat_id=msg.chat.id,
             message_id=msg.message_id,)
         r.set("lastseen", "EveryBody")

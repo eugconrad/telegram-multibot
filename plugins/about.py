@@ -1,19 +1,18 @@
 from pyrogram import Client , Message , Filters
 from db import r
+import bot
 import time
 
-abouttext = """
-**[Multibot]** О проекте:
+abouttext = bot.botfullprefix + """О проекте:
 
-`Multibot` представляет из себя модульного бота с набором различных развлекательно-инфррмационных чат-функций а так же автоматизацию неких задач, таких как автоответчик и тд
-Бот легко может дополняться с помощью написания подключаемых плагинов на языке Python
+`Multibot` представляет из себя русскоговорящего модульного юзербота с набором различных развлекательно-инфррмационных функций а так же автоматизацию неких задач, таких как автоответчик и тд
+Бот легко может дополняться с помощью написания пользовательских плагинов на языке Python
 
-`Multibot` разработан для личного аккаунта Телеграм. Не для использования в Телеграм ботах (!)
+`Multibot` разработан для личного аккаунта Telegram (userbot). Не для использования в ботах (!)
 
-Ссылка на github проекта: https://github.com/Conradk10/telegram-multibot
-"""
+""" + bot.botfullsuffix
 
-@Client.on_message(Filters.regex("^[Aa]bout$") & Filters.me, group=100)
+@Client.on_message(Filters.regex("!about") & Filters.me, group=0)
 def help(app : Client ,msg : Message):
     app.delete_messages(msg.chat.id, msg.message_id)
     app.send_photo(

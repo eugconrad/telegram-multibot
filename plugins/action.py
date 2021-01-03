@@ -1,18 +1,21 @@
 from pyrogram import Client , Message , Filters
 from db import r
+import bot
 import time
 
-@Client.on_message(Filters.regex("^[Aa]ction$") & Filters.me)
+# Вкл/выкл Action
+@Client.on_message(Filters.regex("!action") & Filters.me, group = 1)
 def action(app : Client ,msg : Message):
 
     chatid = msg.chat.id
-
+    action = r.get("action")
+    
     if str(chatid) in r.smembers("chataction"):
         r.srem("chataction", str(chatid))
-        text = "**[Multibot]** Чат действия `Выкл`"
+        text = bot.botfullprefix + "Чат действия `Выкл`"
     else:
         r.sadd("chataction", str(chatid))
-        text = "**[Multibot]** Чат действия `Вкл`"
+        text = bot.botfullprefix + f"Чат действия `Вкл`\nАктивное чат действие: `{action}`"
 
     app.edit_message_text(text=text,
             chat_id=msg.chat.id,
@@ -23,25 +26,23 @@ def action(app : Client ,msg : Message):
             app.delete_messages(msg.chat.id,msg.message_id)
 
 
-@Client.on_message(Filters.incoming,group = 24)
+@Client.on_message(Filters.incoming, group = 1)
 def incoming(app : Client ,msg : Message):
-    # DEFULT PLAYING
     action = r.get("action") or "playing"
     chatid = msg.chat.id
     if str(chatid) in r.smembers("chataction"):
-
         for i in range(3):
             app.send_chat_action(
                 chatid,
                 action
             )
 
-### SET ACTION
-@Client.on_message(Filters.regex("^[Ss]etaction (.*)$") & Filters.me , group=0)
+# Установить Action
+@Client.on_message(Filters.regex("!setaction (.*)$") & Filters.me, group = 2)
 def setaction(app : Client ,msg : Message):
     action = str(msg.text.split(" ")[1])
     r.set("action", action)
-    app.edit_message_text(text=f"**[Multibot]** `Чат действие установлено на:` {action}",
+    app.edit_message_text(text=bot.botfullprefix + f"Чат действие установлено на: `{action}`",
             chat_id=msg.chat.id,
             message_id=msg.message_id,)
 
@@ -50,12 +51,11 @@ def setaction(app : Client ,msg : Message):
             time.sleep(float(r.get("autodeltime")))
             app.delete_messages(msg.chat.id,msg.message_id)
 
-
-
-@Client.on_message(Filters.regex("^[Aa]ctionlist$") & Filters.me , group=1)
+# Отобразить список доступынх Action
+@Client.on_message(Filters.regex("!actionlist") & Filters.me, group = 3)
 def actionlist(app : Client ,msg : Message):
-    text = """
-\ud83d\udcdd Список доступных чат действий:
+    action = r.get("action")
+    text = bot.botfullprefix + """Список доступных чат действий:
 
 `typing` - печатает...
 `upload_photo` - отправляет фото
@@ -70,11 +70,9 @@ def actionlist(app : Client ,msg : Message):
 `playing` - играет в игру
 
 Установить:
-setaction [действие]
+`!setaction` {действие}
 
-**[Multibot by \ud83c\udf52]**
-"""
-
+""" + f"Установленное чат действие: `{action}`"
     app.edit_message_text(text=text,
             chat_id=msg.chat.id,
             message_id=msg.message_id,)
